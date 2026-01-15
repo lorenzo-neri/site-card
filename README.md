@@ -1,6 +1,21 @@
-# Portfolio (package.json)
+# Portfolio 3D
 
-A 3D portfolio
+Portfolio interattivo realizzato con **Quasar Framework** e **Three.js**, caratterizzato da animazioni 3D e un design moderno e responsive.
+
+## Caratteristiche
+
+- 🎨 Design moderno e responsive
+- 🎭 Animazioni 3D con Three.js
+- ⚡ Framework Quasar per performance ottimali
+- 📱 Completamente responsive
+- 🎯 Sezioni: Hero, About, Progetti, Contatti
+
+## Tecnologie Utilizzate
+
+- **Quasar Framework** - Framework Vue.js per applicazioni moderne
+- **Three.js** - Libreria JavaScript per grafica 3D
+- **TypeScript** - Tipizzazione statica per JavaScript
+- **Vue 3** - Framework JavaScript progressivo
 
 ## Install the dependencies
 

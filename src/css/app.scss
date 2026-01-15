@@ -1,1 +1,28 @@
 // app global css in SCSS form
+
+// Import RemixIcon
+@import 'remixicon/fonts/remixicon.css';
+
+// Rimuovi padding per la business card page
+.q-page-container.no-padding {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+// Nascondi scrollbar per la business card page
+.business-card-page::-webkit-scrollbar {
+  height: 8px;
+}
+
+.business-card-page::-webkit-scrollbar-track {
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.business-card-page::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.3);
+  border-radius: 4px;
+
+  &:hover {
+    background: rgba(124, 58, 237, 0.5);
+  }
+}
