@@ -7,7 +7,7 @@
             <div class="container">
                 <div class="avatar-wrapper">
                     <div class="avatar-circle" @click="triggerSparkles" :class="{ 'sparkling': isSparkling }">
-                        <q-icon name="code" size="4rem" />
+                        <i class="ri-code-s-slash-line remix-icon-large"></i>
                         <!-- Particelle di scintille -->
                         <template v-if="isSparkling">
                             <div v-for="n in sparkleCount" :key="n" class="sparkle" :style="getSparkleStyle(n)"></div>
@@ -27,7 +27,7 @@
         <!-- Skills Section -->
         <section id="skills" class="skills-section">
             <div class="container">
-                <h2 class="section-title q-mt-none">Skills</h2>
+                <h2 class="section-title text-primary q-mt-none">SKILLS</h2>
                 <div class="skills-grid">
                     <div v-for="skill in skills" :key="skill.name" class="skill-item"
                         @mouseenter="hoveredSkill = skill.name" @mouseleave="hoveredSkill = null">
@@ -49,27 +49,29 @@
         <!-- Contacts Section -->
         <section id="contacts" class="contacts-section">
             <div class="container">
-                <h2 class="section-title q-mt-none">Contatti</h2>
+                <h2 class="section-title text-primary q-mt-none">CONTATTI</h2>
                 <div class="contacts-content">
                     <div class="contact-buttons">
-                        <q-btn unelevated rounded color="primary" size="lg" icon="fab fa-linkedin" label="LinkedIn"
-                            class="contact-btn" href="https://linkedin.com/in/lorenzo-neri" target="_blank" />
-                        <q-btn unelevated rounded outline color="primary" size="lg" icon="fab fa-github" label="GitHub"
-                            class="contact-btn" href="https://github.com/lorenzo-neri" target="_blank" />
-                        <q-btn unelevated rounded outline color="primary" size="lg" icon="email" label="Email"
-                            class="contact-btn" href="mailto:contact@lorenzoneri.com" />
+                        <q-btn no-caps unelevated rounded outline color="primary" size="lg" class="contact-btn"
+                            href="https://github.com/lorenzo-neri" target="_blank">
+                            <i class="ri-github-fill remix-icon-btn"></i>
+                            GitHub
+                        </q-btn>
+                        <q-btn no-caps unelevated rounded outline color="primary" size="lg" class="contact-btn"
+                            href="https://linkedin.com/in/lorenzo-neri-dev" target="_blank">
+                            <i class="ri-linkedin-box-fill remix-icon-btn"></i>
+                            LinkedIn
+                        </q-btn>
+
+                        <q-btn no-caps unelevated rounded outline color="primary" size="lg" class="contact-btn"
+                            href="mailto:lorenzo21neri@gmail.com">
+                            <i class="ri-mail-fill remix-icon-btn"></i>
+                            Email
+                        </q-btn>
                     </div>
-                    <div class="email-display">
-                        <code>contact@lorenzoneri.com</code>
+                    <div class="email-display qr-placeholder">
+                        <code>lorenzo21neri@gmail.com</code>
                     </div>
-                    <div class="qr-section">
-                        <div class="qr-placeholder">
-                            <q-icon name="qr_code" size="4rem" />
-                            <p>Scansiona per visitare il sito</p>
-                        </div>
-                    </div>
-                    <q-btn unelevated rounded color="accent" size="lg" label="Contattami" class="cta-btn"
-                        @click="scrollToContact" />
                 </div>
             </div>
         </section>
@@ -86,7 +88,7 @@
         <div class="bottom-nav">
             <button v-if="currentIndex > 0" @click="navigateTo(currentIndex - 1)" class="bottom-nav-btn bottom-nav-left"
                 aria-label="Sezione precedente">
-                <q-icon name="arrow_back" size="1.5rem" />
+                <i class="ri-arrow-left-line remix-icon-nav"></i>
             </button>
 
             <div class="bottom-nav-indicators">
@@ -96,12 +98,12 @@
 
             <button v-if="currentIndex < 3" @click="navigateTo(currentIndex + 1)"
                 class="bottom-nav-btn bottom-nav-right" aria-label="Sezione successiva">
-                <q-icon name="arrow_forward" size="1.5rem" />
+                <i class="ri-arrow-right-line remix-icon-nav"></i>
             </button>
 
             <button v-if="currentIndex === 3" class="bottom-nav-btn bottom-nav-right bottom-nav-heart" disabled
                 aria-label="Fine">
-                <q-icon name="favorite" size="1.5rem" class="heart-icon" />
+                <i class="ri-heart-fill remix-icon-nav heart-icon"></i>
             </button>
         </div>
     </q-page>
@@ -176,10 +178,6 @@ const navigateTo = (index: number): void => {
     }
 };
 
-const scrollToContact = (): void => {
-    navigateTo(2); // Contacts è l'indice 2
-};
-
 const checkScrollPosition = (): void => {
     if (!pageElement) return;
     const scrollLeft = pageElement.scrollLeft;
@@ -213,6 +211,7 @@ onUnmounted(() => {
     color: #e2e8f0;
     font-family: 'Inter', sans-serif;
     height: 100vh;
+    height: -webkit-fill-available; // Per iOS Safari
     width: 100vw;
     overflow-x: auto;
     overflow-y: hidden;
@@ -220,6 +219,11 @@ onUnmounted(() => {
     display: flex;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
+    // Gestione safe areas iOS Safari
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
 }
 
 // Assicura che il contenuto sia sopra il background 3D
@@ -238,6 +242,11 @@ onUnmounted(() => {
     margin: 0 auto;
     padding: 0 2rem;
     width: 100%;
+    box-sizing: border-box;
+
+    @media (max-width: 768px) {
+        padding: 0 1rem;
+    }
 }
 
 // Hero Section
@@ -418,29 +427,64 @@ onUnmounted(() => {
     line-height: 1.6;
 }
 
-// Skills Section
 .skills-section {
     min-width: 100vw;
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100vh; // Min, non fisso
+    padding: 4rem 2rem 12rem; // Extra bottom per nav
     display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
+    flex-direction: column;
+    align-items: center; // Solo orizzontale
+    overflow-y: auto; // Scroll sempre
+    overflow-x: hidden;
+    box-sizing: border-box;
     animation: fadeInUp 0.8s ease-out 0.2s both;
     flex-shrink: 0;
-    overflow-y: auto;
+    position: relative;
+    // Scrollbar custom
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(124, 58, 237, 0.4);
+        border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+        padding: 2rem 1rem 14rem; // Mobile extra
+        align-items: stretch; // Full width mobile
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        flex: none; // Non crescono
+    }
+
+    &::before {
+        margin-top: auto;
+    }
+
+    // Pusha contenuto giù
+    &::after {
+        margin-bottom: auto;
+    }
 }
+
 
 .section-title {
     font-size: 2.5rem !important;
     font-weight: 600;
     text-align: center;
     margin-bottom: 3rem;
-    color: #e2e8f0;
+    margin-top: 0;
 
     @media (max-width: 768px) {
         font-size: 1.5rem;
+        margin-bottom: 1.5rem;
     }
 }
 
@@ -448,16 +492,19 @@ onUnmounted(() => {
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
-    margin-top: 2rem;
+    margin-top: 0;
+    margin-bottom: 0;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
 
     @media (max-width: 768px) {
         gap: 1.5rem;
         max-width: 100%;
+        margin-bottom: 2rem; // Spazio extra in basso per evitare che la nav copra le card
     }
 }
 
@@ -502,6 +549,26 @@ onUnmounted(() => {
         color: inherit;
         line-height: 1;
     }
+}
+
+// Stili per icone RemixIcon in diverse parti del componente
+.remix-icon-large {
+    font-size: 4rem;
+    color: inherit;
+    line-height: 1;
+    display: inline-block;
+}
+
+.remix-icon-btn {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+    line-height: 1;
+}
+
+.remix-icon-nav {
+    font-size: 1.5rem;
+    color: inherit;
+    line-height: 1;
 }
 
 .skill-name {
@@ -558,6 +625,9 @@ onUnmounted(() => {
 
 .contact-btn {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 
     &:hover {
         transform: scale(1.05);
@@ -584,7 +654,7 @@ onUnmounted(() => {
 }
 
 .qr-placeholder {
-    padding: 2rem;
+    padding: 1.5rem;
     background: rgba(124, 58, 237, 0.05);
     border-radius: 12px;
     border: 2px dashed rgba(124, 58, 237, 0.3);
@@ -593,19 +663,6 @@ onUnmounted(() => {
         margin-top: 1rem;
         font-size: 0.9rem;
         color: #94a3b8;
-    }
-}
-
-.cta-btn {
-    margin-top: 2rem;
-    padding: 1rem 3rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
     }
 }
 
@@ -634,6 +691,7 @@ onUnmounted(() => {
 .bottom-nav {
     position: fixed;
     bottom: 2rem;
+    bottom: calc(2rem + env(safe-area-inset-bottom)); // Tiene conto delle safe areas iOS
     left: 50%;
     transform: translateX(-50%);
     z-index: 9999;
@@ -649,6 +707,7 @@ onUnmounted(() => {
 
     @media (max-width: 768px) {
         bottom: 1rem;
+        bottom: calc(1rem + env(safe-area-inset-bottom)); // Tiene conto delle safe areas iOS su mobile
         gap: 1rem;
         padding: 0.5rem 1rem;
     }
@@ -752,7 +811,6 @@ onUnmounted(() => {
     }
 
     .hero-section,
-    .skills-section,
     .contacts-section,
     .footer {
         padding: 2rem 1rem;
@@ -765,6 +823,43 @@ onUnmounted(() => {
 
     .contact-btn {
         width: 100%;
+    }
+}
+
+// Per schermi molto piccoli (telefoni piccoli)
+@media (max-width: 480px) {
+    .skills-section {
+        padding: 1rem 0.5rem 7rem 0.5rem; // Padding-bottom aumentato per evitare che la nav copra le card
+        min-height: 100vh;
+        height: auto;
+    }
+
+    .section-title {
+        font-size: 1.25rem !important;
+        margin-bottom: 1rem;
+        margin-top: 0;
+    }
+
+    .skills-grid {
+        gap: 1rem;
+        margin-top: 0;
+    }
+
+    .skill-item {
+        padding: 1rem;
+        flex: 0 0 calc(50% - 0.5rem);
+        max-width: calc(50% - 0.5rem);
+    }
+
+    .container {
+        padding: 0 0.5rem;
+    }
+
+    .bottom-nav {
+        bottom: 0.75rem;
+        bottom: calc(0.75rem + env(safe-area-inset-bottom));
+        padding: 0.4rem 0.8rem;
+        gap: 0.75rem;
     }
 }
 </style>
