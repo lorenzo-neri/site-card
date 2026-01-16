@@ -58,10 +58,10 @@ const initThree = () => {
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-        size: 0.03,
+        size: 0.1,
         vertexColors: true,
         transparent: true,
-        opacity: 0.3,
+        opacity: 0.6,
     });
 
     particles = new THREE.Points(geometry, material);
