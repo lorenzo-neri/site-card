@@ -1,9 +1,9 @@
 {
   "name": "package.json",
   "version": "0.0.1",
-  "description": "A 3D portfolio",
-  "productName": "Portfolio",
-  "author": "Kayo",
+  "description": "A personal website card",
+  "productName": "lorenzoneri",
+  "author": "Lorenzo Neri",
   "type": "module",
   "private": true,
   "scripts": {

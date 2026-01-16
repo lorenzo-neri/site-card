@@ -64,13 +64,13 @@
                         </q-btn>
 
                         <q-btn no-caps unelevated rounded outline color="primary" size="lg" class="contact-btn"
-                            href="mailto:lorenzo21neri@gmail.com">
+                            href="mailto:ciao@lorenzoneri.dev">
                             <i class="ri-mail-fill remix-icon-btn"></i>
                             Email
                         </q-btn>
                     </div>
                     <div class="email-display qr-placeholder">
-                        <code>lorenzo21neri@gmail.com</code>
+                        <code>ciao@lorenzoneri.dev</code>
                     </div>
                 </div>
             </div>
