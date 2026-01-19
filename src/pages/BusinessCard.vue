@@ -27,7 +27,7 @@
         <!-- Skills Section -->
         <section id="skills" class="skills-section">
             <div class="container">
-                <h2 class="section-title text-primary q-mt-none">SKILLS</h2>
+                <h2 class="section-title  q-mt-none">SKILLS</h2>
                 <div class="skills-grid">
                     <div v-for="skill in skills" :key="skill.name" class="skill-item"
                         @mouseenter="hoveredSkill = skill.name" @mouseleave="hoveredSkill = null">
@@ -49,7 +49,7 @@
         <!-- Contacts Section -->
         <section id="contacts" class="contacts-section">
             <div class="container">
-                <h2 class="section-title text-primary q-mt-none">CONTACTS</h2>
+                <h2 class="section-title  q-mt-none">CONTACTS</h2>
                 <div class="contacts-content">
                     <div class="contact-buttons">
                         <q-btn no-caps unelevated rounded outline color="primary" size="lg" class="contact-btn"
