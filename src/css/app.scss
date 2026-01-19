@@ -11,7 +11,7 @@ body {
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 html {
@@ -24,7 +24,7 @@ html {
 
 body {
   // Assicura che il body si estenda fino ai bordi
-  position: fixed;
+  // position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -92,3 +92,32 @@ body {
     background: rgba(124, 58, 237, 0.5);
   }
 }
+
+.business-card-page {
+  // Nascondi completamente scrollbar orizzontale
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+  
+  &::-webkit-scrollbar {
+    height: 0 !important; /* Zero height per nascondere */
+  }
+  
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+}
+
+.business-card-page {
+  scrollbar-gutter: stable both-edges; /* Previene shift layout */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+

@@ -218,12 +218,18 @@ onUnmounted(() => {
     position: relative;
     display: flex;
     scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
+    // scroll-behavior: smooth;q
     // Gestione safe areas iOS Safari
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
     padding-left: env(safe-area-inset-left);
     padding-right: env(safe-area-inset-right);
+    -webkit-overflow-scrolling: touch !important;
+    touch-action: pan-x !important;
+    overscroll-behavior-x: contain; // Previene bounce infinito
+    height: 100vh !important; // Forza altezza fissa per viewport
+    height: -webkit-fill-available !important;
+
 }
 
 // Assicura che il contenuto sia sopra il background 3D
