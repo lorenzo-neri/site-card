@@ -80,7 +80,7 @@
         <footer id="footer" class="footer">
             <div class="container">
                 <p>&copy; 2026 Lorenzo Neri</p>
-                <p class="made-with">Made with ❤️ e code</p>
+                <p class="made-with">Made with ❤️ and code</p>
             </div>
         </footer>
 
