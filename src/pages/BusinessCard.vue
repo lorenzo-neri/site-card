@@ -49,7 +49,7 @@
         <!-- Contacts Section -->
         <section id="contacts" class="contacts-section">
             <div class="container">
-                <h2 class="section-title text-primary q-mt-none">CONTATTI</h2>
+                <h2 class="section-title text-primary q-mt-none">CONTACTS</h2>
                 <div class="contacts-content">
                     <div class="contact-buttons">
                         <q-btn no-caps unelevated rounded outline color="primary" size="lg" class="contact-btn"
