@@ -55,9 +55,7 @@
                 <div class="row q-col-gutter-md  full-width">
 
                     <div class="col-12 col-sm-6 flex flex-center q-px-lg q-pb-none">
-                        <div class="full-width bg-primary flex flex-center q-pt-md border-radius-12">
-                            <q-img src="../assets/me1.png" class="me"></q-img>
-                        </div>
+                        <PhotoAboutMe />
                     </div>
 
                     <div class="col-12 col-sm-6 q-mb-lg flex items-center q-px-lg">
@@ -154,6 +152,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import BusinessCard3D from 'components/BusinessCard3D.vue';
 import { copyToClipboard } from 'quasar';
 import { Notify } from 'quasar';
+import PhotoAboutMe from 'src/components/PhotoAboutMe.vue';
 
 const copyString = async (text: string): Promise<void> => {
     try {
@@ -294,10 +293,6 @@ a .q-btn {
     color: #e2e8f0 !important;
 }
 
-.me {
-    width: 60%;
-}
-
 .business-card-page {
     background: #0a0a0a;
     color: #e2e8f0;
@@ -367,6 +362,8 @@ a .q-btn {
 .avatar-wrapper {
     margin-bottom: 2rem;
 }
+
+
 
 .avatar-circle {
     width: 120px;
@@ -745,6 +742,12 @@ a .q-btn {
         font-size: 1rem;
         color: #7c3aed;
     }
+}
+
+.email-display:hover {
+    background: rgba(124, 58, 237, 0.1);
+    border-color: rgba(124, 58, 237, 0.3);
+    cursor: pointer;
 }
 
 .qr-section {
