@@ -24,6 +24,8 @@
             </div>
         </section>
 
+
+
         <!-- Skills Section -->
         <section id="skills" class="skills-section">
             <div class="container">
@@ -40,6 +42,43 @@
                         <span class="skill-name">{{ skill.name }}</span>
                         <div class="skill-bar">
                             <div class="skill-progress" :style="{ width: skill.proficiency + '%' }"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- about section -->
+        <section id="about" class="skills-section">
+            <div class="container">
+                <h2 class="section-title q-mt-none">ABOUT ME</h2>
+                <div class="row q-col-gutter-md  full-width">
+
+                    <div class="col-12 col-sm-6 flex flex-center q-px-lg q-pb-none">
+                        <div class="full-width bg-primary flex flex-center q-pt-md border-radius-12">
+                            <q-img src="../assets/me1.png" class="me"></q-img>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-sm-6 q-mb-lg flex items-center q-px-lg">
+                        <div>
+
+                            <p class="q-mb-none">
+                                I'm a passionate Full-Stack Developer with a strong focus on Vue.js and Firebase. With a
+                                strong
+                                background in web development, I have honed my skills in creating dynamic and
+                                interactive
+                                user
+                                interfaces. My expertise in Firebase enables me to build robust and secure applications
+                                that
+                                can
+                                handle real-time data, authentication, and hosting.
+                            </p>
+                            <q-btn no-caps unelevated rounded outline color="primary" size="lg"
+                                class="q-my-lg q-mb-xl contact-btn" @click="scrollTo('contacts')">
+                                <i class="ri-send-ins-fill remix-icon-btn"></i>
+                                Contact me
+                            </q-btn>
                         </div>
                     </div>
                 </div>
@@ -65,12 +104,13 @@
 
                         <q-btn no-caps unelevated rounded outline color="primary" size="lg" class="contact-btn"
                             href="mailto:ciao@lorenzoneri.dev">
-                            <i class="ri-mail-fill remix-icon-btn"></i>
+                            <i class="ri-chat-1-fill remix-icon-btn"></i>
                             Email
                         </q-btn>
                     </div>
-                    <div class="email-display qr-placeholder">
+                    <div class="email-display qr-placeholder" @click="copyString('ciao@lorenzoneri.dev')">
                         <code>ciao@lorenzoneri.dev</code>
+                        <i class="ri-clipboard-fill remix-icon-btn text-primary q-ml-md"></i>
                     </div>
                 </div>
             </div>
@@ -96,12 +136,12 @@
                     :class="{ active: currentIndex === index }" :aria-label="`Vai a ${section}`" />
             </div>
 
-            <button v-if="currentIndex < 3" @click="navigateTo(currentIndex + 1)"
+            <button v-if="currentIndex < 4" @click="navigateTo(currentIndex + 1)"
                 class="bottom-nav-btn bottom-nav-right" aria-label="Sezione successiva">
                 <i class="ri-arrow-right-line remix-icon-nav"></i>
             </button>
 
-            <button v-if="currentIndex === 3" class="bottom-nav-btn bottom-nav-right bottom-nav-heart" disabled
+            <button v-if="currentIndex === 4" class="bottom-nav-btn bottom-nav-right bottom-nav-heart" disabled
                 aria-label="Fine">
                 <i class="ri-heart-fill remix-icon-nav heart-icon"></i>
             </button>
@@ -112,6 +152,30 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import BusinessCard3D from 'components/BusinessCard3D.vue';
+import { copyToClipboard } from 'quasar';
+import { Notify } from 'quasar';
+
+const copyString = async (text: string): Promise<void> => {
+    try {
+        await copyToClipboard(text)
+        console.log('Copiato negli appunti!')
+        Notify.create({
+            message: 'Email copiata!',
+            color: 'primary',
+            icon: 'content_copy',
+            timeout: 1500,
+            position: 'top',
+            badgeColor: 'secondary'
+        })
+    } catch (err) {
+        console.error('Errore copia:', err)
+        Notify.create({
+            message: 'Errore nella copia',
+            color: 'negative'
+        })
+    }
+}
+
 
 interface Skill {
     name: string;
@@ -158,7 +222,7 @@ const skills: Skill[] = [
     { name: 'Git', icon: 'ri-git-branch-line', proficiency: 90 },
 ];
 
-const sections = ['hero', 'skills', 'contacts', 'footer'] as const;
+const sections = ['hero', 'about', 'skills', 'contacts', 'footer'] as const;
 const totalSections = sections.length;
 
 const navigateTo = (index: number): void => {
@@ -177,6 +241,27 @@ const navigateTo = (index: number): void => {
         });
     }
 };
+
+const scrollTo = (id: string): void => {
+    const sectionIndex = ['hero', 'about', 'skills', 'contacts'].indexOf(id)
+    if (sectionIndex === -1) {
+        console.error(`Sezione ${id} non trovata`)
+        return
+    }
+
+    if (pageElement) {
+        const scrollPosition = sectionIndex * window.innerWidth
+        pageElement.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth' as ScrollBehavior
+        })
+        // Aggiorna indice nav
+        currentIndex.value = sectionIndex
+    } else {
+        console.error('pageElement non trovato')
+    }
+}
+
 
 const checkScrollPosition = (): void => {
     if (!pageElement) return;
@@ -206,6 +291,14 @@ onUnmounted(() => {
 <style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
+a .q-btn {
+    color: #e2e8f0 !important;
+}
+
+.me {
+    width: 60%;
+}
+
 .business-card-page {
     background: #0a0a0a;
     color: #e2e8f0;
@@ -234,6 +327,7 @@ onUnmounted(() => {
 
 // Assicura che il contenuto sia sopra il background 3D
 .hero-section,
+.about-section,
 .skills-section,
 .contacts-section,
 .footer {
@@ -438,7 +532,7 @@ onUnmounted(() => {
     width: 100vw;
     min-height: 100vh;
     height: 100vh; // Min, non fisso
-    padding: 4rem 2rem 12rem; // Extra bottom per nav
+    padding: 4rem 2rem 7rem; // Extra bottom per nav
     display: flex;
     flex-direction: column;
     align-items: center; // Solo orizzontale
@@ -460,7 +554,7 @@ onUnmounted(() => {
     }
 
     @media (max-width: 768px) {
-        padding: 2rem 1rem 14rem; // Mobile extra
+        padding: 2rem 1rem 1<4rem; // Mobile extra
         align-items: stretch; // Full width mobile
     }
 
@@ -633,7 +727,6 @@ onUnmounted(() => {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
 
     &:hover {
         transform: scale(1.05);
@@ -695,6 +788,7 @@ onUnmounted(() => {
 
 // Navigazione in basso
 .bottom-nav {
+    opacity: 0.7;
     position: fixed;
     bottom: 2rem;
     bottom: calc(2rem + env(safe-area-inset-bottom)); // Tiene conto delle safe areas iOS
@@ -835,7 +929,7 @@ onUnmounted(() => {
 // Per schermi molto piccoli (telefoni piccoli)
 @media (max-width: 480px) {
     .skills-section {
-        padding: 1rem 0.5rem 7rem 0.5rem; // Padding-bottom aumentato per evitare che la nav copra le card
+        padding: 1rem 0.5rem 3rem 0.5rem; // Padding-bottom aumentato per evitare che la nav copra le card
         min-height: 100vh;
         height: auto;
     }

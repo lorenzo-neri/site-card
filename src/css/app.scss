@@ -97,15 +97,15 @@ body {
   // Nascondi completamente scrollbar orizzontale
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
-  
+
   &::-webkit-scrollbar {
     height: 0 !important; /* Zero height per nascondere */
   }
-  
+
   &::-webkit-scrollbar-track {
     display: none;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     display: none;
   }
@@ -115,9 +115,12 @@ body {
   scrollbar-gutter: stable both-edges; /* Previene shift layout */
   -ms-overflow-style: none;
   scrollbar-width: none;
-  
+
   &::-webkit-scrollbar {
     display: none !important;
   }
 }
 
+.border-radius-12 {
+  border-radius: 12px;
+}
