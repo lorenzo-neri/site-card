@@ -158,9 +158,8 @@ import { Notify } from 'quasar';
 const copyString = async (text: string): Promise<void> => {
     try {
         await copyToClipboard(text)
-        console.log('Copiato negli appunti!')
         Notify.create({
-            message: 'Email copiata!',
+            message: 'Copied email!',
             color: 'primary',
             icon: 'content_copy',
             timeout: 1500,
