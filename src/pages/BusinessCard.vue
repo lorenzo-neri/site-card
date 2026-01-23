@@ -139,9 +139,13 @@
                 <i class="ri-arrow-right-line remix-icon-nav"></i>
             </button>
 
-            <button v-if="currentIndex === 4" class="bottom-nav-btn bottom-nav-right bottom-nav-heart" disabled
-                aria-label="Fine">
-                <i class="ri-heart-fill remix-icon-nav heart-icon"></i>
+            <button v-if="currentIndex === 4" @click="toggleHeart"
+                class="bottom-nav-btn bottom-nav-right bottom-nav-heart animated "
+                :class="isHeartClicked ? '' : 'pulse-infinite'" :aria-label="isHeartClicked ? 'Grazie ❤️' : 'Fine'">
+                <i class="ri-poker-hearts-fill remix-icon-nav heart-icon" :class="{
+                    'clicked': isHeartClicked,
+                }">
+                </i>
             </button>
         </div>
     </q-page>
@@ -153,6 +157,11 @@ import BusinessCard3D from 'components/BusinessCard3D.vue';
 import { copyToClipboard } from 'quasar';
 import { Notify } from 'quasar';
 import PhotoAboutMe from 'src/components/PhotoAboutMe.vue';
+
+const isHeartClicked = ref(false);
+const toggleHeart = (): void => {
+    isHeartClicked.value = !isHeartClicked.value
+}
 
 const copyString = async (text: string): Promise<void> => {
     try {
@@ -843,11 +852,40 @@ a .q-btn {
     }
 }
 
+.pulse-infinite {
+    animation: q-pulse-infinite 0.7s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes q-pulse-infinite {
+
+    0%,
+    100% {
+        transform: scale(0.9);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
 .bottom-nav-heart {
     .heart-icon {
-        color: #ef4444;
+        color: #7c3aed; // Viola primary originale
+        transition: all 0.3s ease;
         animation: heartbeat 1s ease-in-out infinite;
     }
+
+    // Cuore cliccato: diventa rosso opaco al 100%
+    .heart-icon.clicked {
+        color: #ef4444 !important; // Rosso vivo
+        opacity: 1 !important; // 100% opaco
+        scale: 1.1 !important;
+    }
+
+    // Alternativa: rosso più scuro se preferisci
+    // .heart-icon.clicked {
+    //   color: #dc2626 !important;
+    // }
 }
 
 .bottom-nav-indicators {
