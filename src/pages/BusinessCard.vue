@@ -6,12 +6,12 @@
 
         <!-- Barra in alto -->
         <header class="topbar" :class="{ solid: scrolled }">
-            <a href="#hero" class="logo" @click.prevent="go('hero')">LN<span>.</span></a>
+            <a href="#hero" class="logo" translate="no" @click.prevent="go('hero')">LN<span>.</span></a>
             <nav class="links">
                 <a v-for="s in navSections" :key="s" :href="`#${s}`" :class="{ active: active === s }"
                     @click.prevent="go(s)">{{ t.nav[s] }}</a>
             </nav>
-            <div class="lang" role="group" aria-label="Language">
+            <div class="lang" role="group" aria-label="Language" translate="no">
                 <button :class="{ on: lang === 'it' }" @click="setLang('it')">IT</button>
                 <button :class="{ on: lang === 'en' }" @click="setLang('en')">EN</button>
             </div>
@@ -56,7 +56,7 @@
                             <span class="metric-value">{{ p.metric }}</span>
                             <span class="metric-label">{{ p.metricLabel }}</span>
                         </div>
-                        <ul class="stack">
+                        <ul class="stack" translate="no">
                             <li v-for="s in p.stack" :key="s">{{ s }}</li>
                         </ul>
                         <a v-if="p.url" class="project-link" :href="p.url" target="_blank" rel="noopener">
@@ -131,7 +131,7 @@
                 <p class="lead reveal">{{ t.contacts.lead }}</p>
 
                 <button class="email reveal" @click="copyString(email)">
-                    <span class="email-text">{{ email }}</span>
+                    <span class="email-text" translate="no">{{ email }}</span>
                     <span class="email-hint"><i class="ri-file-copy-line" /> {{ t.contacts.tapCopy }}</span>
                 </button>
 
@@ -150,7 +150,7 @@
                 aria-live="polite">
                 <span class="toast-icon"><i :class="toast.ok ? 'ri-check-line' : 'ri-error-warning-line'" /></span>
                 <span class="toast-text">{{ toast.text }}</span>
-                <span v-if="toast.ok" class="toast-meta">{{ email }}</span>
+                <span v-if="toast.ok" class="toast-meta" translate="no">{{ email }}</span>
             </div>
         </Transition>
 
